@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>画像を200KB以下に圧縮する方法｜画質を保ったまま軽くする手順</title>
+<meta name="description" content="オンライン申請やメール添付で求められる「200KB以下」に画像を収める手順を整理。リサイズ・形式変更・圧縮率の順番、目標サイズ別の解像度目安、形式の選び方、サーバーに送らずに圧縮する方法まで。">
+<link rel="canonical" href="https://fusion-foo.github.io/zipo-ja/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="画像を200KB以下に圧縮する方法｜画質を保ったまま軽くする手順">
+<meta property="og:description" content="「200KB以下」の指定に困ったときの実務手順。リサイズ→形式変更→圧縮率の順で進めるのが基本です。">
+<meta property="og:url" content="https://fusion-foo.github.io/zipo-ja/">
+<meta property="og:locale" content="ja_JP">
+<style>
+:root{--fg:#1a1a1a;--muted:#5c5c5c;--line:#e2e2e2;--bg:#fff;--soft:#f7f7f5;--link:#0b6b57}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.85;font-size:16px}
+main{max-width:720px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:26px;line-height:1.5;margin:0 0 20px}
+h2{font-size:19px;margin:44px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+p{margin:0 0 16px}
+ul,ol{margin:0 0 16px;padding-left:22px}
+li{margin:0 0 6px}
+.lead{color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:15px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+th{background:var(--soft);font-weight:500}
+.note{font-size:14px;color:var(--muted)}
+.q{font-weight:500;margin:18px 0 4px}
+.cta{margin:36px 0;padding:20px;background:var(--soft);border:1px solid var(--line);border-radius:12px}
+.cta a{color:var(--link);font-weight:500}
+footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","inLanguage":"ja","headline":"画像を200KB以下に圧縮する方法","description":"「200KB以下」の指定に画像を収める実務手順。リサイズ・形式変更・圧縮率の順番と、目標サイズ別の目安を整理。","mainEntityOfPage":{"@type":"WebPage","@id":"https://fusion-foo.github.io/zipo-ja/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"ja","mainEntity":[
+{"@type":"Question","name":"200KBを下回るまで自動で圧縮してくれますか？","acceptedAnswer":{"@type":"Answer","text":"目標サイズを指定できるツールであれば、収まるまで圧縮率を調整してくれます。手動で何度も試す手間を省けます。"}},
+{"@type":"Question","name":"何回も圧縮すると画質は劣化しますか？","acceptedAnswer":{"@type":"Answer","text":"劣化します。一般的な画像圧縮は非可逆なので、必ず元ファイルから1回で仕上げるのが基本です。"}},
+{"@type":"Question","name":"スマートフォンでもできますか？","acceptedAnswer":{"@type":"Answer","text":"ブラウザで動作するツールならスマートフォンでも可能です。端末内で処理するタイプは通信量も増えません。"}},
+{"@type":"Question","name":"複数枚をまとめて処理できますか？","acceptedAnswer":{"@type":"Answer","text":"一括処理に対応したツールを選ぶと、同じ設定で容量を揃えられます。"}}]}
+</script>
+</head>
+<body>
+<main>
+<h1>画像を200KB以下に圧縮する方法</h1>
+<p class="lead">「200KB以下にしてください」——オンライン申請、履歴書の添付、フリマアプリの出品など、この指定で手が止まった経験はないでしょうか。ここでは、画質をできるだけ保ったまま目標サイズに収める手順を、順番に整理します。</p>
+
+<h2>なぜ「200KB以下」という指定が多いのか</h2>
+<ul>
+<li>申請フォームやメール添付には、そもそも容量の上限がある</li>
+<li>モバイル回線でも開けるよう、軽くしておく必要がある</li>
+<li>受け取る側の保存容量や転送量を抑えたい運用が多い</li>
+</ul>
+<p>つまり上限は「入れ物の都合」です。中身である画質はできるだけ残したい——これが圧縮の目的になります。</p>
+
+<h2>圧縮は3つの操作に分けて考える</h2>
+<ol>
+<li><strong>リサイズ</strong>（解像度を下げる）— 効果が最も大きい操作です。長辺2000pxを1200pxにするだけで、容量はおおむね半分以下になります。</li>
+<li><strong>再エンコード</strong>（圧縮率を上げる）— 画質と容量のトレードオフになります。</li>
+<li><strong>形式変更</strong>（WebP・AVIF に変える）— 同じ見た目なら JPEG より2〜5割ほど小さくなることもあります。</li>
+</ol>
+<p>進める順番は<strong>リサイズ → 形式変更 → 圧縮率</strong>です。最初から最強の設定にすると、画質を戻せなくなります。</p>
+
+<h2>目標サイズ別の目安</h2>
+<table>
+<thead><tr><th>目標サイズ</th><th>長辺の目安</th><th>向いている場面</th></tr></thead>
+<tbody>
+<tr><td>20KB</td><td>〜400px</td><td>アイコン・小さなサムネイル</td></tr>
+<tr><td>50KB</td><td>〜600px</td><td>一覧用のサムネイル</td></tr>
+<tr><td>100KB</td><td>〜800px</td><td>ブログ本文・メール添付</td></tr>
+<tr><td>200KB</td><td>〜1200px</td><td>申請フォーム・履歴書写真・商品画像</td></tr>
+<tr><td>500KB</td><td>〜1600px</td><td>記事のメイン画像</td></tr>
+</tbody>
+</table>
+<p class="note">被写体の細かさによって変わります。あくまで目安として使ってください。</p>
+
+<h2>形式の選び方</h2>
+<ul>
+<li><strong>写真</strong> → WebP（対応が広い）／ AVIF（より小さいが対応はやや狭い）</li>
+<li><strong>ロゴ・文字入りのスクリーンショット</strong> → PNG（輪郭が潰れにくい）</li>
+<li><strong>互換性を最優先</strong>（古いソフトに渡す場合） → JPEG</li>
+<li><strong>透過が必要</strong> → PNG または WebP</li>
+</ul>
+
+<h2>画質を落とさずに縮めるコツ</h2>
+<ul>
+<li>一気に縮めず、目標より少し上の設定から<strong>1段ずつ</strong>確認する</li>
+<li>文字や細い線を含む画像は圧縮に弱いので、PNG を選ぶ</li>
+<li>仕上がりは必ず拡大して確認する（特に顔・文字）</li>
+<li>元ファイルは残す。上書き保存はしない</li>
+</ul>
+
+<h2>サーバーに送らずに圧縮する</h2>
+<p>申請書類や身分証、保険の書類などは、できれば外部のサーバーにアップロードしたくないものです。ブラウザ内だけで処理するタイプのツールであれば、画像は端末から出ません。仕組みとしては WebAssembly が使われることが多く、Rust で書かれた圧縮処理をブラウザ上で実行するため、通信が発生せずオフラインでも動作します。</p>
+
+<h2>よくある質問</h2>
+<p class="q">200KBを下回るまで自動でやってくれる？</p>
+<p>目標サイズを指定できるツールなら、収まるまで圧縮率を調整してくれます。手動で何度も試す手間が省けます。</p>
+<p class="q">何回も圧縮すると画質は劣化する？</p>
+<p>劣化します。一般的な圧縮は非可逆なので、元ファイルから1回で仕上げるのが基本です。</p>
+<p class="q">スマホでもできる？</p>
+<p>ブラウザで動くツールなら可能です。端末内で処理するものは通信量も増えません。</p>
+<p class="q">まとめて処理したい</p>
+<p>一括処理に対応したツールを選ぶと、同じ設定で容量を揃えられます。</p>
+
+<div class="cta">
+<p>ここで整理した手順をそのまま実行できるツールを公開しています。目標サイズの指定と形式の変換に対応し、画像はサーバーに送信されません。</p>
+<p><a href="https://zipo.pics/ja/compress-image-to/200kb/">画像を200KBに圧縮する（zipo.pics）</a></p>
+</div>
+
+<footer>このページは zipo.pics の運営者が作成した日本語ガイドです。</footer>
+</main>
+</body>
+</html>
